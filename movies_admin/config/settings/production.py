@@ -1,3 +1,6 @@
 from .base import *  # noqa
 
-# Пока оставим его пустым
+ALLOWED_HOSTS += [
+    '0.0.0.0',
+    'localhost',
+]

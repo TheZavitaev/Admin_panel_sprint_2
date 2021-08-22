@@ -36,7 +36,7 @@ class FilmWorkAdmin(admin.ModelAdmin):
          ),
     )
     inlines = (PersonInLineAdmin, GenreInLineAdmin)
-    search_fields = ('title', 'description', 'type', 'genres',)
+    search_fields = ('title', 'description', 'type', 'genres__name',)
 
 
 @admin.register(Person)
@@ -52,4 +52,4 @@ class GenreAdmin(admin.ModelAdmin):
     list_display = ('name', 'description',)
     fields = ('name', 'description',)
     inlines = (GenreInLineAdmin,)
-    search_fields = ('name', 'description',)
+    search_fields = ('name',)
