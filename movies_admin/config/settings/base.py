@@ -5,9 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+# При сборке не тянется переменная окружения, поэтому так:
+SECRET_KEY = 'w!!n-wjvcvsnty#!u+vyq3*ku6k-ure-c3n8^w3u%sml(2)9i('
+# SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
@@ -20,9 +22,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'rest_framework',
-    'django_filters',
 
     'movies',
 ]
@@ -84,14 +83,6 @@ DATABASES = {
             'options': '-c search_path=content,public',
         }
     }
-}
-
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend',
-    ],
-    'DEFAULT_PAGINATION_CLASS': 'api.v1.pagination.PageNumberPaginationWithCount',
-    'PAGE_SIZE': 50
 }
 
 LANGUAGE_CODE = 'en-us'

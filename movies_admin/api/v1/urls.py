@@ -1,9 +1,7 @@
-from rest_framework import routers
+from django.urls import path
+from api.v1 import views
 
-from api.v1.views import FilmWorkViewSet
-
-router = routers.SimpleRouter()
-
-router.register(r'movies', FilmWorkViewSet, basename='film_work')
-
-urlpatterns = router.urls
+urlpatterns = [
+    path('movies/', views.FilmWorkApi.as_view()),
+    path('movies/<str:id>', views.FilmWorkDetailsApi.as_view())
+]
