@@ -45,23 +45,23 @@ class FilmWorkApiMixin:
 
 
 class FilmWorkApi(FilmWorkApiMixin, BaseListView):
+    paginate_by = 50
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        query_list = list(self.get_queryset())
-        paginator = self.get_paginator(query_list, 50)
+        data = self.get_queryset()
 
-        page_num = self.request.GET.get('page')
-        if page_num == 'last':
-            page = paginator.get_page(paginator.num_pages)
-        else:
-            page = paginator.get_page(page_num)
+        paginator, page, object_list, is_paginated = self.paginate_queryset(data, self.paginate_by)
+        count = paginator.count
+        total_pages = paginator.num_pages
+        prev = page.previous_page_number() if page.has_previous() else None
+        next = page.next_page_number() if page.has_next() else None
 
         context = {
-            'count': paginator.count,
-            'total_pages': paginator.num_pages,
-            'prev': page.previous_page_number() if page.has_previous() else None,
-            'next': page.next_page_number() if page.has_next() else None,
-            'results': page.object_list
+            'count': count,
+            'total_pages': total_pages,
+            'prev': prev,
+            'next': next,
+            'results': list(object_list)
         }
         return context
 

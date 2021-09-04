@@ -7,7 +7,7 @@ volumes:
 services:
   db:
     container_name: postgres_middle_python
-    image: postgres:13
+    image: postgres:13.4
     restart: always
     expose:
       - '5432'
